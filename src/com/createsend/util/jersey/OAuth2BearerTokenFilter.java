@@ -21,17 +21,17 @@
  */
 package com.createsend.util.jersey;
 
-import com.sun.jersey.api.client.filter.ClientFilter;
-import com.sun.jersey.api.client.ClientHandlerException;
-import com.sun.jersey.api.client.ClientRequest;
-import com.sun.jersey.api.client.ClientResponse;
+import java.io.IOException;
+
+import javax.ws.rs.client.ClientRequestContext;
+import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
 
 /**
  * Client filter adding Authorization header containing OAuth2 bearer token
  * to the HTTP request, if no such header is already present
  */
-public final class OAuth2BearerTokenFilter extends ClientFilter {
+public final class OAuth2BearerTokenFilter implements ClientRequestFilter {
 
     private final String authentication;
 
@@ -44,12 +44,11 @@ public final class OAuth2BearerTokenFilter extends ClientFilter {
         authentication = "Bearer " + accessToken;
     }
 
-    @Override
-    public ClientResponse handle(final ClientRequest cr) throws ClientHandlerException {
-
-        if (!cr.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
-            cr.getHeaders().add(HttpHeaders.AUTHORIZATION, authentication);
+	@Override
+	public void filter(ClientRequestContext requestContext) throws IOException {
+		if (!requestContext.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+			requestContext.getHeaders().add(HttpHeaders.AUTHORIZATION, authentication);
         }
-        return getNext().handle(cr);
-    }
+		
+	}
 }

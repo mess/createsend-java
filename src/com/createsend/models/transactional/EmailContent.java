@@ -21,9 +21,9 @@
  */
 package com.createsend.models.transactional;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EmailContent {
 

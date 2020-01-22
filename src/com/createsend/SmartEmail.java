@@ -29,7 +29,7 @@ import com.createsend.models.transactional.response.SmartEmailStatus;
 import com.createsend.util.AuthenticationDetails;
 import com.createsend.util.JerseyClientImpl;
 import com.createsend.util.exceptions.CreateSendException;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
+import javax.ws.rs.core.MultivaluedHashMap;
 
 import javax.ws.rs.core.MultivaluedMap;
 import java.util.UUID;
@@ -86,7 +86,7 @@ public class SmartEmail extends CreateSendBase {
      * @throws CreateSendException
      */
     public SmartEmailItem[] list(SmartEmailStatus status, String clientID) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         if (status != null) {
             queryString.add("status", status.toValue());
         }

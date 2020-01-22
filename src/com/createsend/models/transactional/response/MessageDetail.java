@@ -21,12 +21,12 @@
  */
 package com.createsend.models.transactional.response;
 
-import com.createsend.models.transactional.EmailContent;
-import com.createsend.models.transactional.request.Attachment;
-import org.codehaus.jackson.annotate.JsonProperty;
-
 import java.util.List;
 import java.util.Map;
+
+import com.createsend.models.transactional.EmailContent;
+import com.createsend.models.transactional.request.Attachment;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MessageDetail {
     @JsonProperty("From")

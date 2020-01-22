@@ -1,5 +1,6 @@
 package com.createsend;
 
+import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 
 import com.createsend.models.people.Person;
@@ -8,7 +9,6 @@ import com.createsend.models.people.PersonToAdd;
 import com.createsend.util.AuthenticationDetails;
 import com.createsend.util.JerseyClientImpl;
 import com.createsend.util.exceptions.CreateSendException;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 public class People extends CreateSendBase {
 	private String clientID;
@@ -55,7 +55,7 @@ public class People extends CreateSendBase {
      * Getting person details</a>
      */
     public Person details(String emailAddress) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("email", emailAddress);
         
         return jerseyClient.get(Person.class, queryString, "clients", clientID, "people" + ".json");
@@ -69,7 +69,7 @@ public class People extends CreateSendBase {
      * Deleting a person</a>
      */
     public void delete(String emailAddress) throws CreateSendException {
-    	MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+    	MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("email", emailAddress);
         
         jerseyClient.delete(queryString, "clients", clientID, "people" + ".json");
@@ -84,7 +84,7 @@ public class People extends CreateSendBase {
      * Updating a person</a>
      */
     public void update(String originalEmailAddress, Person newDetails) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("email", originalEmailAddress);
         
         jerseyClient.put(newDetails, queryString, "clients", clientID, "people" + ".json");

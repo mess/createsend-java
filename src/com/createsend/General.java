@@ -40,7 +40,7 @@ import com.createsend.util.Configuration;
 import com.createsend.util.JerseyClient;
 import com.createsend.util.JerseyClientImpl;
 import com.createsend.util.exceptions.CreateSendException;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
+import javax.ws.rs.core.MultivaluedHashMap;
 
 /**
  * Provides methods for accessing all  
@@ -182,7 +182,7 @@ public class General extends CreateSendBase {
     } 
     
     public void setPrimaryContact(String emailAddress) throws CreateSendException {
-    	MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+    	MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("email", emailAddress);
         jerseyClient.put("", queryString, "primarycontact.json");
     }

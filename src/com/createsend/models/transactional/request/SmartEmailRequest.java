@@ -21,10 +21,15 @@
  */
 package com.createsend.models.transactional.request;
 
-import com.createsend.models.subscribers.ConsentToTrack;
-import org.codehaus.jackson.annotate.JsonIgnore;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
-import java.util.*;
+import com.createsend.models.subscribers.ConsentToTrack;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class SmartEmailRequest {
     @JsonIgnore

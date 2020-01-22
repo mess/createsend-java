@@ -10,7 +10,7 @@ import com.createsend.util.AuthenticationDetails;
 import com.createsend.util.JerseyClientImpl;
 import com.createsend.util.exceptions.CreateSendException;
 import com.createsend.util.jersey.JsonProvider;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
+import javax.ws.rs.core.MultivaluedHashMap;
 
 import javax.ws.rs.core.MultivaluedMap;
 import java.util.Date;
@@ -67,7 +67,7 @@ public class JourneyEmails extends CreateSendBase {
 
     private PagedResult<JourneyEmailRecipient> recipients(
             String fromDate, Integer page, Integer pageSize, String orderDirection) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("date", fromDate);
 
         return jerseyClient.getPagedResult(page, pageSize, null, orderDirection, null,
@@ -118,7 +118,7 @@ public class JourneyEmails extends CreateSendBase {
 
     private PagedResult<JourneyEmailBounceDetail> bounces(
             String bouncesFrom, Integer page, Integer pageSize, String orderDirection) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("date", bouncesFrom);
 
         return jerseyClient.getPagedResult(page, pageSize, null, orderDirection, queryString,
@@ -169,7 +169,7 @@ public class JourneyEmails extends CreateSendBase {
 
     private PagedResult<JourneyEmailOpenDetail> opens(
             String opensFrom, Integer page, Integer pageSize, String orderDirection) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("date", opensFrom);
 
         return jerseyClient.getPagedResult(page, pageSize, null, orderDirection,
@@ -220,7 +220,7 @@ public class JourneyEmails extends CreateSendBase {
 
     private PagedResult<JourneyEmailClickDetail> clicks(
             String clicksFrom, Integer page, Integer pageSize, String orderDirection) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("date", clicksFrom);
 
         return jerseyClient.getPagedResult(page, pageSize, null, orderDirection,
@@ -271,7 +271,7 @@ public class JourneyEmails extends CreateSendBase {
 
     private PagedResult<JourneyEmailUnsubscribeDetail> unsubscribes(
             String unsubscribesFrom, Integer page, Integer pageSize, String orderDirection) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("date", unsubscribesFrom);
 
         return jerseyClient.getPagedResult(page, pageSize, null, orderDirection,

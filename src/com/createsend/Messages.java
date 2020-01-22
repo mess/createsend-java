@@ -28,7 +28,7 @@ import com.createsend.models.transactional.response.TransactionalStatistics;
 import com.createsend.util.AuthenticationDetails;
 import com.createsend.util.JerseyClientImpl;
 import com.createsend.util.exceptions.CreateSendException;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
+import javax.ws.rs.core.MultivaluedHashMap;
 
 import javax.ws.rs.core.MultivaluedMap;
 import java.text.DateFormat;
@@ -66,7 +66,7 @@ public class Messages extends CreateSendBase {
      * @throws CreateSendException
      */
     public Message get(UUID messageID, boolean includeStatistics) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("statistics", String.valueOf(includeStatistics));
 
         return jerseyClient.get(Message.class, queryString, "transactional", "messages", messageID.toString());
@@ -84,7 +84,7 @@ public class Messages extends CreateSendBase {
      * @throws CreateSendException
      */
     public TransactionalStatistics statistics(String clientID, UUID smartEmailID, String group, Date from, Date to, String timezone) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
 
         if (clientID != null) {
             queryString.add("clientID", clientID);
@@ -141,7 +141,7 @@ public class Messages extends CreateSendBase {
      * @throws CreateSendException
      */
     public MessageLogItem[] timeline(String clientID, UUID sentBeforeID, UUID sentAfterID, Integer count, String status, UUID smartEmailID, String group) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
 
         if (clientID != null) {
             queryString.add("clientID", clientID);

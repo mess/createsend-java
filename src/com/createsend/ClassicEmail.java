@@ -27,7 +27,7 @@ import com.createsend.models.transactional.response.MessageSent;
 import com.createsend.util.AuthenticationDetails;
 import com.createsend.util.JerseyClientImpl;
 import com.createsend.util.exceptions.CreateSendException;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
+import javax.ws.rs.core.MultivaluedHashMap;
 
 import javax.ws.rs.core.MultivaluedMap;
 
@@ -62,7 +62,7 @@ public class ClassicEmail extends CreateSendBase {
      * @throws CreateSendException
      */
     public ClassicEmailGroup[] list(String clientID) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
 
         if (clientID != null) {
             queryString.add("clientID", clientID);
@@ -88,7 +88,7 @@ public class ClassicEmail extends CreateSendBase {
      * @throws CreateSendException
      */
     public MessageSent[] send(ClassicEmailRequest classicEmailRequest, String clientID) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
 
         if (clientID != null) {
             queryString.add("clientID", clientID);

@@ -21,10 +21,10 @@
  */
 package com.createsend.models.transactional.response;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
 import java.util.Date;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SmartEmailDetails {
     @JsonProperty("SmartEmailID")

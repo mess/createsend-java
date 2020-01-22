@@ -21,12 +21,14 @@
  */
 package com.createsend.util.jersey;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.WebTarget;
+
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
+
 
 public class AuthorisedResourceFactory extends ResourceFactory {  
-    private HTTPBasicAuthFilter apiKeyFilter;
+    private HttpAuthenticationFeature apiKeyFeature;
     private OAuth2BearerTokenFilter oauthTokenFilter;
 
     public AuthorisedResourceFactory(String accessToken) {
@@ -34,16 +36,17 @@ public class AuthorisedResourceFactory extends ResourceFactory {
     }
 
     public AuthorisedResourceFactory(String username, String password) {
-        apiKeyFilter = new HTTPBasicAuthFilter(username, password);
+        apiKeyFeature = HttpAuthenticationFeature.basic(username, password);
     }
 
     @Override
-    public WebResource getResource(Client client, String... pathElements) {
-        WebResource resource = super.getResource(client, pathElements);
-        if (apiKeyFilter != null)
-	        resource.addFilter(apiKeyFilter);
+    public WebTarget getResource(Client client, String... pathElements) {
+    	WebTarget resource = super.getResource(client, pathElements);
+    	
+        if (apiKeyFeature != null)
+	        resource.register(apiKeyFeature);
         if (oauthTokenFilter != null)
-        	resource.addFilter(oauthTokenFilter);
+        	resource.register(oauthTokenFilter);
         return resource;
     }
 }

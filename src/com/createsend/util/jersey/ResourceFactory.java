@@ -21,22 +21,25 @@
  */
 package com.createsend.util.jersey;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.WebTarget;
+
+import org.glassfish.jersey.client.ClientConfig;
+
 import com.createsend.util.Configuration;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
 
 public abstract class ResourceFactory {
 
-    public WebResource getResource(Client client, String... pathElements) {
+    public WebTarget getResource(Client client, String... pathElements) {
     	return getResource(Configuration.Current.getApiEndpoint(),
     			client, pathElements);
     }
 
-	public WebResource getResource(String baseUri, Client client, String... pathElements) {
-        WebResource resource = client.resource(baseUri);
-        resource.setProperty(ClientConfig.PROPERTY_CHUNKED_ENCODING_SIZE, 64 * 1024);
-        resource.setProperty(com.sun.jersey.api.json.JSONConfiguration.FEATURE_POJO_MAPPING, "true");
+	public WebTarget getResource(String baseUri, Client client, String... pathElements) {
+		WebTarget resource = client.target(baseUri);
+//        resource.setProperty("", 64 * 1024);
+//        resource.setProperty(ClientConfig.PROPERTY_CHUNKED_ENCODING_SIZE, 64 * 1024);
+//        resource.setProperty(com.sun.jersey.api.json.JSONConfiguration.FEATURE_POJO_MAPPING, "true");
 
         for (String pathElement : pathElements) {
             resource = resource.path(pathElement);

@@ -21,9 +21,9 @@
  */
 package com.createsend.models.transactional.response;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TransactionalOpen {
     @JsonProperty("EmailAddress")

@@ -44,7 +44,7 @@ import com.createsend.models.subscribers.SuppressedSubscriber;
 import com.createsend.util.AuthenticationDetails;
 import com.createsend.util.JerseyClientImpl;
 import com.createsend.util.exceptions.CreateSendException;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
+import javax.ws.rs.core.MultivaluedHashMap;
 
 /**
  * Provides methods for accessing all <a href="http://www.campaignmonitor.com/api/clients/" target="_blank">
@@ -171,7 +171,7 @@ public class Clients extends CreateSendBase {
      * Lists for an email address</a>
      */
     public ListForEmail[] listsForEmailAddress(String emailAddress) throws CreateSendException {
-        MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+        MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("email", emailAddress);
 
         return jerseyClient.get(ListForEmail[].class, queryString, "clients", clientID, "listsforemail.json");
@@ -211,7 +211,7 @@ public class Clients extends CreateSendBase {
     }
     
     public void unsuppress(String email) throws CreateSendException {
-		MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+		MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
 		queryString.add("email", email);
 		jerseyClient.put("", queryString, "clients", clientID, "unsuppress.json");
     }
@@ -315,7 +315,7 @@ public class Clients extends CreateSendBase {
      * Setting primary contact</a>
      */
     public void setPrimaryContact(String emailAddress) throws CreateSendException {
-    	MultivaluedMap<String, String> queryString = new MultivaluedMapImpl();
+    	MultivaluedMap<String, String> queryString = new MultivaluedHashMap();
         queryString.add("email", emailAddress);
     	jerseyClient.put("", queryString, "clients", clientID, "primarycontact.json");
     }

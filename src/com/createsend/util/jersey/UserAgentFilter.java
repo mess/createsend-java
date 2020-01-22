@@ -21,16 +21,17 @@
  */
 package com.createsend.util.jersey;
 
+import java.io.IOException;
+
+import javax.ws.rs.client.ClientRequestContext;
+import javax.ws.rs.client.ClientRequestFilter;
+
 import com.createsend.util.Configuration;
-import com.sun.jersey.api.client.ClientHandlerException;
-import com.sun.jersey.api.client.ClientRequest;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.filter.ClientFilter;
 
 /**
  * A ClientFilter to set the Java wrappers User-Agent
  */
-public class UserAgentFilter extends ClientFilter {
+public class UserAgentFilter implements ClientRequestFilter {
     
     private static String userAgent;
     
@@ -45,9 +46,10 @@ public class UserAgentFilter extends ClientFilter {
         
     }
     
-    @Override
-    public ClientResponse handle(ClientRequest cr) throws ClientHandlerException {
-        cr.getHeaders().add("User-Agent", userAgent);
-        return getNext().handle(cr);
-    }
+
+	@Override
+	public void filter(ClientRequestContext requestContext) throws IOException {
+		requestContext.getHeaders().putSingle("User-Agent", userAgent);
+		
+	}
 }

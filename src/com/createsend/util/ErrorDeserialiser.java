@@ -21,13 +21,15 @@
  */
 package com.createsend.util;
 
-import com.createsend.models.ApiErrorResponse;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+
+import javax.ws.rs.core.GenericType;
+
+import org.glassfish.jersey.client.ClientResponse;
+
+import com.createsend.models.ApiErrorResponse;
 
 public class ErrorDeserialiser<T> {
 
@@ -46,6 +48,6 @@ public class ErrorDeserialiser<T> {
                 // ok to ignore
             }
         }
-        return response.getEntity(new GenericType<ApiErrorResponse<T>>(returnType));
+        return response.readEntity(new GenericType<ApiErrorResponse<T>>(returnType));
     }
 }
