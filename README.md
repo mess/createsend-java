@@ -1,8 +1,9 @@
-# createsend-java [![Build Status](https://secure.travis-ci.org/campaignmonitor/createsend-java.png)][travis]
-
-[travis]: http://travis-ci.org/campaignmonitor/createsend-java
-
+# createsend-java 
 A Java library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/).
+
+PORTING TO:
+* **UPDATE TO JERSEY 2.29.1**
+* **UPDATE TO JACKSON 2.10**
 
 ## Installation
 
